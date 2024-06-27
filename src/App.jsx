@@ -23,9 +23,24 @@ const App = () => {
     shipIndex();
   }, []);
 
+  const handleSearch = async (term) => {
+    const data = await starshipService.search(term);
+
+    const shipData = data.map((ship) => {
+      return {
+        name: ship.name,
+        class: ship.starship_class,
+        manufacturer: ship.manufacturer,
+        model: ship.model,
+      };
+    });
+    setStarships(shipData);
+  };
+
   return (
     <>
       <h1>Star Wars API</h1>
+      <StarshipSearch handleSearch={handleSearch} />
       <StarshipList starships={starships} />
     </>
   );

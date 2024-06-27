@@ -10,4 +10,14 @@ const index = async () => {
   }
 };
 
-export { index };
+const search = async (term) => {
+  try {
+    const data = await fetch(`${BASE_URL}?search=${term}`);
+    const shipData = await data.json();
+    return shipData.results;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export { index, search };
